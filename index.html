@@ -1,0 +1,29 @@
+<div style="margin-top: 20px; padding: 15px; background: #1a1a1a; border: 1px solid #333; border-radius: 8px;">
+    <h3 style="color: #ff9d00; margin-top: 0; font-size: 14px; text-transform: uppercase;">Emisja na Ekran TV</h3>
+    
+    <div style="display: flex; gap: 10px;">
+        <button onclick="wyslijNaEkran()" style="flex: 1; background: #c67c00; color: white; border: none; padding: 12px; cursor: pointer; font-weight: bold; border-radius: 4px; transition: 0.2s;">
+            Pokaż na TV
+        </button>
+        
+        <button onclick="wyczyscEkran()" style="flex: 1; background: #444; color: white; border: none; padding: 12px; cursor: pointer; font-weight: bold; border-radius: 4px; transition: 0.2s;">
+            Schowaj (Gwiazdki)
+        </button>
+    </div>
+</div>
+
+<script>
+    // Funkcja wysyłająca aktualny slajd z podglądu na TV
+    function wyslijNaEkran() {
+        // Pobieramy tekst, który aktualnie widzisz w podglądzie (slides[currentSlideIndex])
+        const tekstDoWyslania = slides[currentSlideIndex].join('\n');
+        bc.postMessage({ action: 'update', text: tekstDoWyslania });
+        console.log("Wysłano do kosciol-tv-system: " + tekstDoWyslania);
+    }
+
+    // Funkcja czyszcząca ekran (zostają same gwiazdki)
+    function wyczyscEkran() {
+        bc.postMessage({ action: 'update', text: '' });
+        console.log("Ekran wygaszony (tryb gwiazdek)");
+    }
+</script>
